@@ -18,6 +18,6 @@
   "homepage": "https://github.com/FIBOSIO/fibos-tokens#readme",
   "dependencies": {
     "fibos-accounts": "^1.0.0",
-    "fibos-tracker": "^1.4.0"
+    "fibos-tracker": "wxsimon/fibos-tracker"
   }
 }
