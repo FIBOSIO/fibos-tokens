@@ -107,13 +107,8 @@ http.post(`http://127.0.0.1:8081/1.1`, {
 				}
 			){
 				account_from_name
-				transaction{
-					trx_id
-					block{
-						block_num
-						status
-						block_time
-					}
+				action{
+					rawData
 				}
 				token_from{
 					token_name
@@ -148,13 +143,8 @@ http.post(`http://127.0.0.1:8081/1.1`, {
 			){
 				account_from_name
 				contract_action
-				transaction{
-					trx_id
-					block{
-						block_num
-						status
-						block_time
-					}
+				action{
+					rawData
 				}
 				token_from{
 					token_name
@@ -190,13 +180,8 @@ http.post(`http://127.0.0.1:8081/1.1`, {
 			){
 				account_from_name
 				contract_action
-				transaction{
-					trx_id
-					block{
-						block_num
-						status
-						block_time
-					}
+				action{
+					rawData
 				}
 				token_from{
 					token_name

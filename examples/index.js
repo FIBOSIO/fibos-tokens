@@ -32,13 +32,6 @@ Tracker.Config.DBconnString = "mysql://root:123456@127.0.0.1/fibos_chain";
 const tracker = new Tracker();
 
 tracker.use(require('../'));
-tracker.diagram();
-
-tracker.app.db(db => {
-    ['tokens', 'accounts', 'blocks', 'permissions', 'transactions', 'tokens_action'].forEach(t => {
-        db.driver.execQuerySync(`truncate table fibos_${t}`);
-    })
-})
 
 tracker.emitter();
 fibos.start();
