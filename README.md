@@ -40,20 +40,16 @@ fibos_tokens 表
 | created| Date | 通证创建时间 |
 | createdAt | Date | 记录创建时间 |
 | updatedAt | Date | 记录更新时间 |
-| creator_id | int | 通证创建者关联id |
+| creator_id | String | 通证创建者关联账号 |
 
 fibos_tokens_action 表
 
 | 字段 | 类型 | 说明 |
 | --- | --- | --- |
 | id | int | 自增id |
-| account_from_name | String | 交易发起账户 |
-| account_to_name | String | 交易目标账户 |
-| token_from_name | String | 交易发起通证 |
-| token_to_name | String | 交易目标通证 |
+| account_from_id | String | 交易发起账户 |
+| account_to_id | String | 交易目标账户 |
 | contract_action | String | 交易名称 |
-| account_from_id | String | 交易发起关联用户id|
-| account_to_id | String | 交易目标关联用户id |
 | token_from_id | int | 交易发起通证关联id |
 | token_to_id | int | 交易目标通证关联id|
 | transaction_id | int | 交易关联事务id|
@@ -106,7 +102,7 @@ http.post(`http://127.0.0.1:8081/1.1`, {
 					contract_action:"eosio.token/extransfer"
 				}
 			){
-				account_from_name
+				account_from_id
 				action{
 					rawData
 				}
@@ -141,7 +137,7 @@ http.post(`http://127.0.0.1:8081/1.1`, {
 					}
 				}
 			){
-				account_from_name
+				account_from_id
 				contract_action
 				action{
 					rawData
@@ -178,7 +174,7 @@ http.post(`http://127.0.0.1:8081/1.1`, {
 					}]
 				}
 			){
-				account_from_name
+				account_from_id
 				contract_action
 				action{
 					rawData
