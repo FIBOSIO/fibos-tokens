@@ -1,0 +1,10 @@
+examples/data/
+examples/logs/
+*.db*
+node_modules
+logs/
+data
+
+package-lock.json
+
+_test

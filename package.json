@@ -1,0 +1,23 @@
+{
+  "name": "fibos-tokens",
+  "version": "1.0.0",
+  "main": "./lib/",
+  "description": "Basic token module based on fibos-tracker.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FIBOSIO/fibos-tokens.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FIBOSIO/fibos-tokens/issues"
+  },
+  "homepage": "https://github.com/FIBOSIO/fibos-tokens#readme",
+  "dependencies": {
+    "fibos-accounts": "^1.0.0",
+    "fibos-tracker": "^1.4.0"
+  }
+}
