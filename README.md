@@ -86,10 +86,10 @@ svr.start();
 
 业务场景-:
 
-需要查询合约 eosio.token 中所有的 transfer 操作
+查询账号 「fibos」 的所有操作
 
 ```javascript
-
+const http = require('http');
 http.post(`http://127.0.0.1:8081/1.1`, {
 	headers: {
 		'Content-Type': 'application/graphql'
@@ -99,26 +99,43 @@ http.post(`http://127.0.0.1:8081/1.1`, {
 			find_fibos_tokens_action(
 				order:"-id"
 				where:{
-					contract_action:"eosio.token/extransfer"
+					or:[{
+						account_from_id: "fibos"
+					},{
+						account_to_id: "fibos"
+					}]
 				}
 			){
-				account_from_id
+				account_from{
+					id
+				}
+				account_to{
+					id
+				}
 				action{
 					rawData
-				}
-				token_from{
-					token_name
-					token_type
-					token_status
+					transaction{
+                          block{
+                              status
+                    }}
 				}
 			}
 		}`
 }).json();
 ```
 
+解释：这条查询的含义为查询和账号 「fibos」相关的所有操作。
+返回结果说明：
+
+account_from->id：操作发起人    
+account_to->id：操作接受人    
+action->rawData：链上具体数据   
+action->transaction->block->status：当前交易状态(noirreversible:该笔交易不会被分叉,irreversible:该笔交易可能被分叉)
+
+
 业务场景二:
 
-查询用户「fibos」的所有 transfer、extransfer 操作
+查询账号 「fibos」的所有转账操作
 
 ``` javascript
 const http = require("http");
@@ -130,66 +147,40 @@ http.post(`http://127.0.0.1:8081/1.1`, {
 		{
 			find_fibos_tokens_action(
 				order:"-id"
-				where:{
-					account_from_name: "fibos"
+				where:{	
+					or:[{
+						account_from_id: "fibos"
+					},{
+						account_to_id: "fibos"
+					}],
 					contract_action:{
-						in:["eosio.token/extransfer","eosio.token/exchange"]
+						in:["eosio.token/transfer","eosio.token/extransfer"]
 					}
 				}
 			){
-				account_from_id
-				contract_action
+				account_from{
+					id
+				}
+				account_to{
+					id
+				}
 				action{
 					rawData
-				}
-				token_from{
-					token_name
-					token_type
-					token_status
+					transaction{
+                          block{
+                              status
+                    }}
 				}
 			}
 		}`
 }).json();
 ```
 
-业务场景三：
-查询用户「fibos」的所有有关 FO 通证的操作记录
+解释：索引条件说明：
 
-```javascript
-const http = require("http");
-http.post(`http://127.0.0.1:8081/1.1`, {
-	headers: {
-		'Content-Type': 'application/graphql'
-	},
-	body: `
-		{
-			find_fibos_tokens_action(
-				order:"-id"
-				where:{
-					account_from_name: "fibos",
-					or:[{
-						token_from_name:"FO@eosio"
-					},{
-						token_to_name:"FO@eosio"
-					}]
-				}
-			){
-				account_from_id
-				contract_action
-				action{
-					rawData
-				}
-				token_from{
-					token_name
-					token_type
-					token_status
-				}
-				token_to{
-					token_name
-					token_type
-					token_status
-				}
-			}
-		}`
-}).json();
-```
+contract_action -> in(["eosio.token/transfer","eosio.token/extransfer"]) FIBOS 中支持转账的方法为 eosio.token/transfer 和 eosio.token/extransfer    
+返回结果说明：    
+account_from->id：操作发起人    
+account_to->id：操作接受人     
+action->rawData：链上具体数据    
+action->transaction->block->status：当前交易状态(noirreversible:该笔交易不会被分叉,irreversible:该笔交易可能被分叉)    
