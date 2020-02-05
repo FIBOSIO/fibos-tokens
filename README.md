@@ -126,9 +126,10 @@ http.post(`http://127.0.0.1:8081/1.1`, {
 
 解释：这条查询的含义为查询和账号 「fibos」相关的所有操作。
 返回结果说明：
-account_from->id：操作发起人
-account_to->id：操作接受人
-action->rawData：链上具体数据
+
+account_from->id：操作发起人    
+account_to->id：操作接受人    
+action->rawData：链上具体数据   
 action->transaction->block->status：当前交易状态(noirreversible:该笔交易不会被分叉,irreversible:该笔交易可能被分叉)
 
 
@@ -175,11 +176,11 @@ http.post(`http://127.0.0.1:8081/1.1`, {
 }).json();
 ```
 
-解释：
-索引条件说明：
-contract_action -> in(["eosio.token/transfer","eosio.token/extransfer"]) FIBOS 中支持转账的方法为 eosio.token/transfer 和 eosio.token/extransfer
-返回结果说明：
-account_from->id：操作发起人
-account_to->id：操作接受人
-action->rawData：链上具体数据
-action->transaction->block->status：当前交易状态(noirreversible:该笔交易不会被分叉,irreversible:该笔交易可能被分叉)
+解释：索引条件说明：
+
+contract_action -> in(["eosio.token/transfer","eosio.token/extransfer"]) FIBOS 中支持转账的方法为 eosio.token/transfer 和 eosio.token/extransfer    
+返回结果说明：    
+account_from->id：操作发起人    
+account_to->id：操作接受人     
+action->rawData：链上具体数据    
+action->transaction->block->status：当前交易状态(noirreversible:该笔交易不会被分叉,irreversible:该笔交易可能被分叉)    
